@@ -26,7 +26,7 @@ module.exports = {
     app.expose({ one: 1, two: 2, three: 3 });
     app.expose({ title: 'My Site' }, 'express.settings');
     app.expose({ add: function(a, b){ return a + b; } }, 'utils');
-    var js = app.expose()
+    var js = app.expose('expose')
       , scope = {};
 
     vm.runInNewContext(js, scope);
