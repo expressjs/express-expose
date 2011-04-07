@@ -18,7 +18,7 @@ module.exports = {
     app.set('title', 'My Site');
     app.set('default language', 'en');
     app.expose(app.settings);
-    app.js.exposed.should.have.length(1);
+    app.js.javascript.should.have.length(1);
   },
   
   'test app.expose(obj, namespace, name)': function(){
