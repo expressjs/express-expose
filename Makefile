@@ -1,5 +1,7 @@
 
 test:
-	@echo "populate me"
+	@./support/expresso/bin/expresso \
+		-I lib \
+		-I support
 
 .PHONY: test
