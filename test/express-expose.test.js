@@ -18,7 +18,7 @@ module.exports = {
     app.set('title', 'My Site');
     app.set('default language', 'en');
     app.expose(app.settings);
-     app.js.exposed.should.have.length(1);
+    app.js.exposed.should.have.length(1);
   },
   
   'test app.expose(obj, namespace, name)': function(){
@@ -27,7 +27,7 @@ module.exports = {
     app.set('default language', 'en');
     app.expose(app.settings, 'express.settings', 'settings');
     app.expose({ foo: 'bar' }, 'express.utils', 'settings');
-     app.js.settings.should.have.length(2);
+    app.js.settings.should.have.length(2);
   },
   
   'test app.expose(name)': function(){
@@ -37,7 +37,7 @@ module.exports = {
     app.expose({ add: function(a, b){ return a + b; } }, 'utils');
     app.expose({ en: 'English' }, 'langs', 'langs');
 
-    var js = app.expose()
+    var js = app.exposed()
       , scope = {};
     
     vm.runInNewContext(js, scope);
@@ -48,7 +48,7 @@ module.exports = {
     scope.express.settings.title.should.equal('My Site');
     scope.utils.add(1,5).should.equal(6);
 
-    var js = app.expose('langs')
+    var js = app.exposed('langs')
       , scope = {};
 
     vm.runInNewContext(js, scope);
