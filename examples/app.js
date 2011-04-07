@@ -7,7 +7,8 @@
 
 var express = require('express')
   , expose = require('../')
-  , app = express.createServer();
+  , app = express.createServer()
+  , url = require('url');
 
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
@@ -33,6 +34,10 @@ app.expose({ sub: function(a,b){ return a - b; } }, 'express.utils');
 app.expose({ en: 'English', fr: 'French' }, 'express', 'languages');
 
 app.get('/', function(req, res){
+  // we might want to expose some user
+  // data this way, blah blah
+  var user = { name: 'tj' };
+  app.expose(user, 'user');
   res.render('index', { layout: false });
 });
 
