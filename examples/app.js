@@ -35,9 +35,9 @@ app.expose({ en: 'English', fr: 'French' }, 'express', 'languages');
 
 app.get('/', function(req, res){
   // we might want to expose some user
-  // as the "user" global to the client
+  // as the "express.current.user" global to the client
   var user = { name: 'tj' };
-  app.expose(user, 'user');
+  app.expose(user, 'express.current.user');
   res.render('index', { layout: false });
 });
 
