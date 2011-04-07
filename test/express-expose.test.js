@@ -30,11 +30,13 @@ module.exports = {
      app.js.settings.should.have.length(2);
   },
   
-  'test app.expose()': function(){
+  'test app.expose(name)': function(){
     var app = express.createServer();
     app.expose({ one: 1, two: 2, three: 3 });
     app.expose({ title: 'My Site' }, 'express.settings');
     app.expose({ add: function(a, b){ return a + b; } }, 'utils');
+    app.expose({ en: 'English' }, 'langs', 'langs');
+
     var js = app.expose()
       , scope = {};
     
@@ -45,5 +47,12 @@ module.exports = {
     
     scope.express.settings.title.should.equal('My Site');
     scope.utils.add(1,5).should.equal(6);
+
+    var js = app.expose('langs')
+      , scope = {};
+
+    vm.runInNewContext(js, scope);
+    scope.should.not.have.property('express');
+    scope.langs.en.should.equal('English');
   }
 };
