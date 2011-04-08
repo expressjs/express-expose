@@ -63,7 +63,7 @@ app.get('/', function(req, res){
   // we might want to expose some user
   // as the "express.current.user" global to the client
   var user = { name: 'tj' };
-  app.expose(user, 'express.current.user');
+  res.expose(user, 'express.current.user');
   res.render('index', { layout: false });
 });
 
