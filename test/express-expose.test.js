@@ -72,5 +72,23 @@ module.exports = {
     vm.runInNewContext(js, scope = {});
     scope.should.not.have.property('lang');
     scope.user.name.should.equal('tj');
+  },
+  
+  'test app.expose(fn) self-calling function': function(){
+    var app = express.createServer()
+      , err;
+
+    app.expose('var foo;')
+    app.expose(function(){
+      foo = 'bar';
+      var bar = 'bar';
+    });
+
+    var js = app.exposed()
+      , scope = {};
+
+    vm.runInNewContext(js, scope);
+    scope.foo.should.equal('bar');
+    scope.should.not.have.property('bar');
   }
 };
