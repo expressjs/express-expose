@@ -28,8 +28,6 @@ app.expose(app.settings);
 var math = { add: function(a,b){ return a + b; } };
 app.expose(math, 'utils').helpers(math);
 
-// This is fine too, since we have an "express" object created
-// by our first call.
 app.expose({ sub: function(a,b){ return a - b; } }, 'express.utils');
 
 // Sometimes you might want to output to a different area,
