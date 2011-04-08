@@ -52,5 +52,25 @@ module.exports = {
     vm.runInNewContext(js, scope);
     scope.lang.should.equal('en');
     scope.user.name.should.equal('tj');
+  },
+  
+  'test app.expose(str, null, scope)': function(){
+    var app = express.createServer();
+
+    app
+      .expose('var user = { name: "tj" };', 'foot')
+      .expose('var lang = "en";');
+
+    var js = app.exposed()
+      , scope = {};
+
+    vm.runInNewContext(js, scope);
+    scope.lang.should.equal('en');
+    scope.should.not.have.property('user');
+
+    js = app.exposed('foot');
+    vm.runInNewContext(js, scope = {});
+    scope.should.not.have.property('lang');
+    scope.user.name.should.equal('tj');
   }
 };
