@@ -37,5 +37,20 @@ module.exports = {
     vm.runInNewContext(js, scope);
     scope.should.not.have.property('express');
     scope.langs.en.should.equal('English');
+  },
+  
+  'test app.expose(str)': function(){
+    var app = express.createServer();
+
+    app
+      .expose('var user = { name: "tj" };')
+      .expose('var lang = "en";');
+
+    var js = app.exposed()
+      , scope = {};
+
+    vm.runInNewContext(js, scope);
+    scope.lang.should.equal('en');
+    scope.user.name.should.equal('tj');
   }
 };
