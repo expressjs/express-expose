@@ -136,17 +136,30 @@ module.exports = {
   'test app.exposeModule(path)': function(){
     var app = express.createServer();
 
-    app.exposeModule('./fixtures/color');
+    app.exposeModule(__dirname + '/fixtures/color');
 
     var js = app.exposed()
       , scope = {};
 
     vm.runInNewContext(js, scope);
-    scope.light('#fff').should.be.true;
-    scope.light('#000').should.be.false;
+    scope.color.light('#ffffff').should.be.true;
+    scope.color.light('#000000').should.be.false;
   },
   
-  'test res.expose()': function(){
+  'test app.exposeModule(path, namespace)': function(){
+    var app = express.createServer();
+
+    app.exposeModule(__dirname + '/fixtures/color', 'colorUtils');
+
+    var js = app.exposed()
+      , scope = {};
+
+    vm.runInNewContext(js, scope);
+    scope.colorUtils.light('#ffffff').should.be.true;
+    scope.colorUtils.light('#000000').should.be.false;
+  },
+  
+  'test res.expose(path)': function(){
     var app = express.createServer()
       , calls = 0;
 
