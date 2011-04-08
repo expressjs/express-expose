@@ -33,13 +33,28 @@ app.expose(math, 'utils').helpers(math);
 app.expose({ sub: function(a,b){ return a - b; } }, 'express.utils');
 
 // Sometimes you might want to output to a different area,
-// so for this we can pass an additional "helper" param,
-// which names the local variable.
+// so for this we can pass an additional param "languages"
+// which tells express which buffer to write to, which ends
+// up providing us with the local variable "languages"
 app.expose({ en: 'English', fr: 'French' }, 'express', 'languages');
 
 // we can also expose "raw" javascript
 // by passing a string
 app.expose('var some = "variable";');
+
+// exposing a named function is easy too, simply pass it in
+// with an optional buffer param for placement within a template
+
+app.expose(function someFunction(){
+  return 'yay';
+}, 'foot');
+
+// another alternative is passing an anonymous function,
+// which executes itself, creating a "wrapper" function
+
+app.expose(function(){
+  alert('this will execute right away :D');
+});
 
 app.get('/', function(req, res){
   // we might want to expose some user
