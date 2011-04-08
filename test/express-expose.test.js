@@ -84,11 +84,24 @@ module.exports = {
       var bar = 'bar';
     });
 
+    app.expose('var name;', 'foot');
+    app.expose(function(){
+      name = 'tj';
+    }, 'foot');
+
     var js = app.exposed()
       , scope = {};
 
     vm.runInNewContext(js, scope);
     scope.foo.should.equal('bar');
     scope.should.not.have.property('bar');
+    scope.should.not.have.property('name');
+
+    var js = app.exposed('foot')
+      , scope = {};
+
+    vm.runInNewContext(js, scope);
+    scope.should.not.have.property('foo');
+    scope.name.should.equal('tj');
   }
 };
