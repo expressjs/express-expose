@@ -5,6 +5,7 @@
 
 var express = require('express')
   , expose = require('express-expose')
+  , assert = require('assert')
   , should = require('should')
   , vm = require('vm');
 
@@ -130,5 +131,36 @@ module.exports = {
     vm.runInNewContext(js, scope);
     scope.sub(8,7).should.equal(1);
     scope.should.not.have.property('add');
+  },
+  
+  'test res.expose()': function(){
+    var app = express.createServer();
+    app.set('views', __dirname + '/views');
+    app.set('view options', { layout: false });
+
+    app.expose({ one: 1 });
+
+    app.get('/', function(req, res){
+      res.expose({ two: 2 });
+      res.render('index.jade');
+    });
+
+    assert.response(app,
+      { url: '/' },
+      function(res){
+        var scope = {};
+        vm.runInNewContext(res.body, scope);
+        scope.express.one.should.equal(1);
+        scope.express.two.should.equal(2);
+      });
+
+    assert.response(app,
+      { url: '/' },
+      function(res){
+        var scope = {};
+        vm.runInNewContext(res.body, scope);
+        scope.express.one.should.equal(1);
+        scope.express.two.should.equal(2);
+      });
   }
 };
