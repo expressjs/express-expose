@@ -22,7 +22,11 @@ app.expose(app.settings);
 
 // funtions are fine too, here we namespace as utils instead.
 // use as "utils.add(1,2);"
-app.expose({ add: function(a,b){ return a + b; } }, 'utils');
+
+// note that here we expose these functions as local variables
+// to the template, as well as the client. 
+var math = { add: function(a,b){ return a + b; } };
+app.expose(math, 'utils').helpers(math);
 
 // This is fine too, since we have an "express" object created
 // by our first call.
