@@ -134,7 +134,8 @@ module.exports = {
   },
   
   'test res.expose()': function(){
-    var app = express.createServer();
+    var app = express.createServer()
+      , calls = 0;
     app.set('views', __dirname + '/views');
     app.set('view options', { layout: false });
 
@@ -142,7 +143,7 @@ module.exports = {
 
     app.get('/', function(req, res){
       res.expose({ two: 2 });
-      res.expose({ name: 'tj' }, 'express.current.user');
+      if (++calls == 1) res.expose({ name: 'tj' }, 'express.current.user');
       res.render('index.jade');
     });
 
@@ -151,7 +152,8 @@ module.exports = {
       function(res){
         var scope = {};
         vm.runInNewContext(res.body, scope);
-        scope.express.current.user.name.should.equal('tj');
+        if (1 == calls) scope.express.current.user.name.should.equal('tj');
+        else should.equal(null, scope.express.current);
         scope.express.one.should.equal(1);
         scope.express.two.should.equal(2);
       });
@@ -161,7 +163,8 @@ module.exports = {
       function(res){
         var scope = {};
         vm.runInNewContext(res.body, scope);
-        scope.express.current.user.name.should.equal('tj');
+        if (1 == calls) scope.express.current.user.name.should.equal('tj');
+        else should.equal(null, scope.express.current);
         scope.express.one.should.equal(1);
         scope.express.two.should.equal(2);
       });
