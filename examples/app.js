@@ -33,6 +33,10 @@ app.expose({ sub: function(a,b){ return a - b; } }, 'express.utils');
 // which names the local variable.
 app.expose({ en: 'English', fr: 'French' }, 'express', 'languages');
 
+// we can also expose "raw" javascript
+// by passing a string
+app.expose('var some = "variable";');
+
 app.get('/', function(req, res){
   // we might want to expose some user
   // as the "express.current.user" global to the client
