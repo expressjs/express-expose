@@ -103,5 +103,32 @@ module.exports = {
     vm.runInNewContext(js, scope);
     scope.should.not.have.property('foo');
     scope.name.should.equal('tj');
+  },
+  
+  'test app.expose(fn) named function': function(){
+    var app = express.createServer()
+      , err;
+
+    app.expose(function add(a, b){
+      return a + b;
+    });
+
+    app.expose(function sub(a, b){
+      return a - b;
+    }, 'foot');
+
+    var js = app.exposed()
+      , scope = {};
+
+    vm.runInNewContext(js, scope);
+    scope.add(1,3).should.equal(4);
+    scope.should.not.have.property('sub');
+
+    var js = app.exposed('foot')
+      , scope = {};
+
+    vm.runInNewContext(js, scope);
+    scope.sub(8,7).should.equal(1);
+    scope.should.not.have.property('add');
   }
 };
