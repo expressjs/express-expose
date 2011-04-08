@@ -3,6 +3,17 @@
 
   Expose helpers and local variables to the client-side
 
+## Installation
+
+    $ npm install express-expose
+
+## Usage
+
+    var express = require('express')
+      , expose = require('expose');
+
+    app.expose(...);
+
 ## Examples
 
  A common use-case for exposing objects to the client-side would be exposing some properties, perhaps the express configuration. The call to `app.expose(obj)` below defaults to exposing the properties to `express.*`, so for example `express.views`, `express.title`, etc.
