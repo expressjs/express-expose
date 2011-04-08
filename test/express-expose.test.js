@@ -149,14 +149,14 @@ module.exports = {
   'test app.exposeModule(path, namespace)': function(){
     var app = express.createServer();
 
-    app.exposeModule(__dirname + '/fixtures/color', 'colorUtils');
+    app.exposeModule(__dirname + '/fixtures/color', 'utils.color');
 
     var js = app.exposed()
       , scope = {};
 
     vm.runInNewContext(js, scope);
-    scope.colorUtils.light('#ffffff').should.be.true;
-    scope.colorUtils.light('#000000').should.be.false;
+    scope.utils.color.light('#ffffff').should.be.true;
+    scope.utils.color.light('#000000').should.be.false;
   },
   
   'test res.expose(path)': function(){
