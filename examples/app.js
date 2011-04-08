@@ -56,7 +56,6 @@ app.expose(function(){
   function notify() {
     alert('this will execute right away :D');
   }
-
   notify();
 });
 
