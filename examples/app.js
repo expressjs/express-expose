@@ -16,9 +16,9 @@ app.set('title', 'Example');
 app.set('default language', 'en');
 
 // expose all the settings to the client-side,
-// for example given the "express" namespace
-// we will have "express.title == 'Example'"
-app.expose(app.settings, 'express');
+// with "express" as the default namespace.
+// for example "express.title == 'Example'"
+app.expose(app.settings);
 
 // funtions are fine too, here we namespace as utils instead.
 // use as "utils.add(1,2);"
@@ -35,7 +35,7 @@ app.expose({ sub: function(a,b){ return a - b; } }, 'express.utils');
 // Sometimes you might want to output to a different area,
 // so for this we can pass an additional "helper" param,
 // which names the local variable.
-app.expose({ en: 'English', fr: 'French' }, 'express.languages', 'languages');
+app.expose({ en: 'English', fr: 'French' }, 'express', 'languages');
 
 // we can also expose "raw" javascript
 // by passing a string

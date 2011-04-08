@@ -15,7 +15,7 @@ module.exports = {
   
   'test app.expose(name)': function(){
     var app = express.createServer();
-    app.expose({ one: 1, two: 2, three: 3 }, 'express');
+    app.expose({ one: 1, two: 2, three: 3 });
     app.expose({ title: 'My Site' }, 'express.settings');
     app.expose({ add: function(a, b){ return a + b; } }, 'utils');
     app.expose({ en: 'English' }, 'langs', 'langs');
