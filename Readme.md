@@ -30,8 +30,6 @@
       var math = { add: function(a,b){ return a + b; } };
       app.expose(math, 'utils').helpers(math);
       
-
-
   Sometimes you might want to output to a different area, so for this we can pass an additional param "languages" which tells express which buffer to write to, which ends up providing us with the local variable "languages" in our template, where the default is "javascript".
 
       app.expose({ en: 'English', fr: 'French' }, 'express', 'languages');
@@ -67,6 +65,15 @@
         res.expose(user, 'express.current.user');
         res.render('index', { layout: false });
       });
+
+ Exposing an entire module as-is is possible as well, this primarily
+ useful when the module relies on internal closures and state.
+
+ The following exposes "color.dark()", "color.light()" etc by default based
+ on the basename of the `path` given, however we pass "utils.color" as a custom namespace.
+
+     app.exposeModule(__dirname + '/color', 'utils.color');
+
 
 ## License 
 
