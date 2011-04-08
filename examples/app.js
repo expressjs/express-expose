@@ -50,10 +50,14 @@ app.expose(function someFunction(){
 }, 'foot');
 
 // another alternative is passing an anonymous function,
-// which executes itself, creating a "wrapper" function
+// which executes itself, creating a "wrapper" function.
 
 app.expose(function(){
-  alert('this will execute right away :D');
+  function notify() {
+    alert('this will execute right away :D');
+  }
+
+  notify();
 });
 
 app.get('/', function(req, res){
