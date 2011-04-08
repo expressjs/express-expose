@@ -133,9 +133,23 @@ module.exports = {
     scope.should.not.have.property('add');
   },
   
+  'test app.exposeModule(path)': function(){
+    var app = express.createServer();
+
+    app.exposeModule('./fixtures/color');
+
+    var js = app.exposed()
+      , scope = {};
+
+    vm.runInNewContext(js, scope);
+    scope.light('#fff').should.be.true;
+    scope.light('#000').should.be.false;
+  },
+  
   'test res.expose()': function(){
     var app = express.createServer()
       , calls = 0;
+
     app.set('views', __dirname + '/views');
     app.set('view options', { layout: false });
 
