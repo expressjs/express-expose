@@ -133,9 +133,36 @@ module.exports = {
     scope.should.not.have.property('add');
   },
   
-  'test res.expose()': function(){
+  'test app.exposeModule(path)': function(){
+    var app = express.createServer();
+
+    app.exposeModule(__dirname + '/fixtures/color');
+
+    var js = app.exposed()
+      , scope = {};
+
+    vm.runInNewContext(js, scope);
+    scope.color.light('#ffffff').should.be.true;
+    scope.color.light('#000000').should.be.false;
+  },
+  
+  'test app.exposeModule(path, namespace)': function(){
+    var app = express.createServer();
+
+    app.exposeModule(__dirname + '/fixtures/color', 'utils.color');
+
+    var js = app.exposed()
+      , scope = {};
+
+    vm.runInNewContext(js, scope);
+    scope.utils.color.light('#ffffff').should.be.true;
+    scope.utils.color.light('#000000').should.be.false;
+  },
+  
+  'test res.expose(path)': function(){
     var app = express.createServer()
       , calls = 0;
+
     app.set('views', __dirname + '/views');
     app.set('view options', { layout: false });
 

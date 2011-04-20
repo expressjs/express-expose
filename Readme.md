@@ -16,6 +16,8 @@
 
 ## Examples
 
+### Exposing Objects
+
  A common use-case for exposing objects to the client-side would be exposing some properties, perhaps the express configuration. The call to `app.expose(obj)` below defaults to exposing the properties to `express.*`, so for example `express.views`, `express.title`, etc.
 
       app.set('views', __dirname + '/views');
@@ -30,12 +32,11 @@
       var math = { add: function(a,b){ return a + b; } };
       app.expose(math, 'utils').helpers(math);
       
-
-
   Sometimes you might want to output to a different area, so for this we can pass an additional param "languages" which tells express which buffer to write to, which ends up providing us with the local variable "languages" in our template, where the default is "javascript".
 
       app.expose({ en: 'English', fr: 'French' }, 'express', 'languages');
 
+### Raw JavaScript
 
   It is also possible to expose "raw" javascript strings.
 
@@ -45,11 +46,15 @@
   
       app.expose('var some = "variable";', 'head');
 
+### Exposing Functions
+
   Exposing a named function is easy too, simply pass it in with an optional buffer name for placement within a template much like above.
 
       app.expose(function someFunction(){
         return 'yay';
       }, 'foot');
+
+### Self-Calling Functions
 
    Another alternative is passing an anonymous function, which executes itself, creating a "wrapper" function.
 
@@ -59,6 +64,18 @@
         }
         notify();
       });
+
+### Exposing Entire Modules
+
+ Exposing an entire module as-is is possible as well, this primarily
+ useful when the module relies on internal closures and state.
+
+ The following exposes "color.dark()", "color.light()" etc by default based
+ on the basename of the `path` given, however we pass "utils.color" as a custom namespace.
+
+     app.exposeModule(__dirname + '/color', 'utils.color');
+
+### Request-Level Exposure
 
  Finally we can apply all of the above at the request-level as well, below we expose "express.current.user" as `{ name: 'tj' }`, for the specific request only.
 

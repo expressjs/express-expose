@@ -57,6 +57,13 @@ app.expose(function(){
   notify();
 });
 
+// expose entire modules to retain their own scope is simple too,
+// simply pass the path, with optional namespace / buffer name.
+
+// the following exposes "color.dark()", "color.light()" etc by default
+// however we pass "utils.color" as a custom namespace.
+app.exposeModule(__dirname + '/color', 'utils.color');
+
 app.get('/', function(req, res){
   // we might want to expose some user
   // as the "express.current.user" global to the client
