@@ -195,5 +195,23 @@ module.exports = {
         scope.express.one.should.equal(1);
         scope.express.two.should.equal(2);
       });
+  },
+  
+  'test app.exposeRequire()': function(){
+    var app = express.createServer();
+
+    app.set('title', 'something');
+    app.exposeRequire();
+    app.expose(app.settings, 'settings');
+    app.exposeModule(__dirname + '/fixtures/color');
+    app.exposeModule(__dirname + '/fixtures/color', 'express/utils/color');
+
+    var js = app.exposed()
+      , scope = {};
+
+    vm.runInNewContext(js, scope);
+    scope.require('settings').title.should.equal('something');
+    scope.require('express/utils/color').light('ffffff').should.be.true;
+    scope.require('color').light('ffffff').should.be.true;
   }
 };

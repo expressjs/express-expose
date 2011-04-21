@@ -4,5 +4,7 @@ html
     script!= javascript
   body
     h1= settings.title
-    script!= languages
-    script!= foot
+    - if (locals.languages) 
+      script!= languages
+    - if (locals.foot) 
+      script!= foot
