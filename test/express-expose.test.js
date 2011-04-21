@@ -206,6 +206,9 @@ module.exports = {
     app.exposeModule(__dirname + '/fixtures/color');
     app.exposeModule(__dirname + '/fixtures/color', 'express/utils/color');
 
+    app.exposeModule(__dirname + '/fixtures/math');
+    app.exposeModule(__dirname + '/fixtures/math/sub', 'math/sub');
+
     var js = app.exposed()
       , scope = {};
 
@@ -213,5 +216,6 @@ module.exports = {
     scope.require('settings').title.should.equal('something');
     scope.require('express/utils/color').light('ffffff').should.be.true;
     scope.require('color').light('ffffff').should.be.true;
+    scope.require('math/sub').sub(3, 3).should.equal(6);
   }
 };
