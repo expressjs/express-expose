@@ -85,6 +85,38 @@
         res.render('index', { layout: false });
       });
 
+### CommonJS Modules
+
+  Similarly we can enable a light-weight commonjs require() implementation simply by calling:
+  
+     app.exposeRequire();
+
+  From that point on, the `namespace` is no longer a dot-delimited property, but a slash-delimited path, for example the following would allow us to `require('utils/color')` within the browser.
+
+     app.exposeModule(__dirname + '/color', 'utils/color');
+
+  By default the path defaults to the basename of the path used to load the module's contents, so we could remove "utils/color", allowing us to `require('color')`.
+
+  The primary benefit of utilizing require() here, is that `color`, or any other module can use require() internally, and as long as we expose those modules as well, they will work in the browser.
+
+  This of course works for things a side from modules as well:
+  
+       app.expose(app.settings, 'settings');
+
+  Which we can then require in our client:
+  
+       require('settings')
+
+       // => {
+           default language: "en"
+         , env: "development"
+         , hints: true
+         , home: "/"
+         , title: "Example"
+         , view engine: "jade"
+         , views: "/Users/tj/Projects/express-expose/examples/views"
+       }
+
 ## License 
 
 (The MIT License)
