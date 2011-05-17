@@ -3,7 +3,13 @@
   , "description": "Expose helpers and local variables to the client-side"
   , "keywords": ["express"]
   , "author": "TJ Holowaychuk <tj@vision-media.ca>"
-  , "dependencies": {}
+  , "devDependencies": {
+      "connect": "1.4.x"
+    , "express": "2.3.x"
+    , "expresso": ">= 0.0.1"
+    , "should": ">= 0.0.1"
+    , "jade": ">= 0.0.1"
+  }
   , "main": "index"
   , "engines": { "node": "0.4.x" }
 }

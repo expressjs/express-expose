@@ -1,7 +1,6 @@
 
 test:
-	@./support/expresso/bin/expresso \
-		-I lib \
-		-I support
+	@./node_modules/expresso/bin/expresso \
+		-I lib 
 
 .PHONY: test
