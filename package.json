@@ -4,6 +4,12 @@
   , "keywords": ["express"]
   , "author": "TJ Holowaychuk <tj@vision-media.ca>"
   , "dependencies": {}
+  , "devDependenciese": {
+    "connect": "1.4.x"
+    "express": "2.3.x"
+    "expresso": ">= 1.0.0"
+    "should": ">= 1.0.0"
+  }
   , "main": "index"
   , "engines": { "node": "0.4.x" }
 }
