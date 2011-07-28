@@ -10,7 +10,7 @@
 ## Usage
 
     var express = require('express')
-      , expose = require('expose');
+      , expose = require('express-expose');
 
     app.expose(...);
 
