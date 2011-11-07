@@ -36,6 +36,14 @@
 
       app.expose({ en: 'English', fr: 'French' }, 'express', 'languages');
 
+  You'll then want to output the default buffer (or others) to your template, in Jade this would look something like:
+  
+      script!= javascript
+
+  And in EJS:
+  
+      <script><%- javascript %></script>
+
 ### Raw JavaScript
 
   It is also possible to expose "raw" javascript strings.
