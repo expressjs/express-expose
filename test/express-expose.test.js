@@ -4,7 +4,7 @@
  */
 
 var express = require('express')
-  , expose = require('express-expose')
+  , expose = require('../')
   , assert = require('assert')
   , should = require('should')
   , vm = require('vm');
