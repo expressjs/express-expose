@@ -1,6 +1,7 @@
 
 test:
-	@./node_modules/expresso/bin/expresso \
-		-I lib 
+	@./node_modules/.bin/mocha \
+		--require should \
+		--ui exports
 
 .PHONY: test
