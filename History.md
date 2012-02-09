@@ -1,4 +1,9 @@
 
+0.2.2 / 2012-02-09 
+==================
+
+  * Fixed conditional assignment (use `window.`) [arlolra]
+
 0.2.1 / 2012-01-18 
 ==================
 
