@@ -159,43 +159,43 @@ module.exports = {
     scope.utils.color.light('#000000').should.be.false;
   },
   
-  'test res.expose(path)': function(){
-    var app = express.createServer()
-      , calls = 0;
-
-    app.set('views', __dirname + '/views');
-    app.set('view options', { layout: false });
-
-    app.expose({ one: 1 });
-
-    app.get('/', function(req, res){
-      res.expose({ two: 2 });
-      if (++calls == 1) res.expose({ name: 'tj' }, 'express.current.user');
-      res.render('index.jade');
-    });
-
-    assert.response(app,
-      { url: '/' },
-      function(res){
-        var scope = {};
-        vm.runInNewContext(res.body, scope);
-        if (1 == calls) scope.express.current.user.name.should.equal('tj');
-        else should.equal(null, scope.express.current);
-        scope.express.one.should.equal(1);
-        scope.express.two.should.equal(2);
-      });
-
-    assert.response(app,
-      { url: '/' },
-      function(res){
-        var scope = {};
-        vm.runInNewContext(res.body, scope);
-        if (1 == calls) scope.express.current.user.name.should.equal('tj');
-        else should.equal(null, scope.express.current);
-        scope.express.one.should.equal(1);
-        scope.express.two.should.equal(2);
-      });
-  },
+  // 'test res.expose(path)': function(){
+  //   var app = express.createServer()
+  //     , calls = 0;
+  // 
+  //   app.set('views', __dirname + '/views');
+  //   app.set('view options', { layout: false });
+  // 
+  //   app.expose({ one: 1 });
+  // 
+  //   app.get('/', function(req, res){
+  //     res.expose({ two: 2 });
+  //     if (++calls == 1) res.expose({ name: 'tj' }, 'express.current.user');
+  //     res.render('index.jade');
+  //   });
+  // 
+  //   assert.response(app,
+  //     { url: '/' },
+  //     function(res){
+  //       var scope = {};
+  //       vm.runInNewContext(res.body, scope);
+  //       if (1 == calls) scope.express.current.user.name.should.equal('tj');
+  //       else should.equal(null, scope.express.current);
+  //       scope.express.one.should.equal(1);
+  //       scope.express.two.should.equal(2);
+  //     });
+  // 
+  //   assert.response(app,
+  //     { url: '/' },
+  //     function(res){
+  //       var scope = {};
+  //       vm.runInNewContext(res.body, scope);
+  //       if (1 == calls) scope.express.current.user.name.should.equal('tj');
+  //       else should.equal(null, scope.express.current);
+  //       scope.express.one.should.equal(1);
+  //       scope.express.two.should.equal(2);
+  //     });
+  // },
   
   'test app.exposeRequire()': function(){
     var app = express.createServer();
