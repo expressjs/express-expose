@@ -23,7 +23,8 @@ module.exports = {
 
     var js = app.exposed()
       , scope = {};
-    
+
+    scope.window = scope;
     vm.runInNewContext(js, scope);
     scope.express.one.should.equal(1);
     scope.express.two.should.equal(2);
@@ -35,6 +36,7 @@ module.exports = {
     var js = app.exposed('langs')
       , scope = {};
 
+    scope.window = scope;
     vm.runInNewContext(js, scope);
     scope.should.not.have.property('express');
     scope.langs.en.should.equal('English');
@@ -101,6 +103,7 @@ module.exports = {
     var js = app.exposed('foot')
       , scope = {};
 
+    scope.window = scope;
     vm.runInNewContext(js, scope);
     scope.should.not.have.property('foo');
     scope.name.should.equal('tj');
@@ -121,6 +124,7 @@ module.exports = {
     var js = app.exposed()
       , scope = {};
 
+    scope.window = scope;
     vm.runInNewContext(js, scope);
     scope.add(1,3).should.equal(4);
     scope.should.not.have.property('sub');
@@ -128,6 +132,7 @@ module.exports = {
     var js = app.exposed('foot')
       , scope = {};
 
+    scope.window = scope;
     vm.runInNewContext(js, scope);
     scope.sub(8,7).should.equal(1);
     scope.should.not.have.property('add');
@@ -141,6 +146,7 @@ module.exports = {
     var js = app.exposed()
       , scope = {};
 
+    scope.window = scope;
     vm.runInNewContext(js, scope);
     scope.color.light('#ffffff').should.be.true;
     scope.color.light('#000000').should.be.false;
@@ -154,6 +160,7 @@ module.exports = {
     var js = app.exposed()
       , scope = {};
 
+    scope.window = scope;
     vm.runInNewContext(js, scope);
     scope.utils.color.light('#ffffff').should.be.true;
     scope.utils.color.light('#000000').should.be.false;
@@ -212,6 +219,7 @@ module.exports = {
     var js = app.exposed()
       , scope = {};
 
+    scope.window = scope;
     vm.runInNewContext(js, scope);
     scope.require('settings').title.should.equal('something');
     scope.require('express/utils/color').light('ffffff').should.be.true;
