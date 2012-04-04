@@ -34,8 +34,8 @@ module.exports = {
     scope.express.settings.title.should.equal('My Site');
     scope.utils.add(1,5).should.equal(6);
     
-    Array.isArray(scope.empty).should.equal(true);
-    Array.isArray(scope.numbers).should.equal(true);
+    scope.empty.should.should.be.an.instanceof(Array);
+    scope.numbers.should.be.an.instanceof(Array);
     scope.empty.should.have.length(0);
     scope.numbers.should.have.length(3);
     scope.numbers[0].should.equal(1);
