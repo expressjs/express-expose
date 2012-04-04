@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -20,6 +19,8 @@ module.exports = {
     app.expose({ title: 'My Site' }, 'express.settings');
     app.expose({ add: function(a, b){ return a + b; } }, 'utils');
     app.expose({ en: 'English' }, 'langs', 'langs');
+    app.expose([], "empty");
+    app.expose([1,2,3], "numbers");
 
     var js = app.exposed()
       , scope = {};
@@ -32,6 +33,14 @@ module.exports = {
     
     scope.express.settings.title.should.equal('My Site');
     scope.utils.add(1,5).should.equal(6);
+    
+    scope.empty.should.should.be.an.instanceof(Array);
+    scope.numbers.should.be.an.instanceof(Array);
+    scope.empty.should.have.length(0);
+    scope.numbers.should.have.length(3);
+    scope.numbers[0].should.equal(1);
+    scope.numbers[1].should.equal(2);
+    scope.numbers[2].should.equal(3);
 
     var js = app.exposed('langs')
       , scope = {};
