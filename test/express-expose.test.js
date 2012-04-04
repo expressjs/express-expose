@@ -36,8 +36,8 @@ module.exports = {
     
     Array.isArray(scope.empty).should.equal(true);
     Array.isArray(scope.numbers).should.equal(true);
-    scope.empty.lenght.should.equal(0);
-    scope.numbers.length.should.equal(3);
+    scope.empty.should.have.length(0);
+    scope.numbers.should.have.length(3);
     scope.numbers[0].should.equal(1);
     scope.numbers[1].should.equal(2);
     scope.numbers[2].should.equal(3);
