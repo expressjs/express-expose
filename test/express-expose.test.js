@@ -15,9 +15,9 @@ module.exports = {
   },
   
   'test app.expose(name)': function(){
-    var app = express.createServer();
+    var app = express();
     app.expose({ one: 1, two: 2, three: 3 });
-    app.expose({ title: 'My Site' }, 'express.settings');
+    app.expose({ title: 'My Site' }, 'app.settings');
     app.expose({ add: function(a, b){ return a + b; } }, 'utils');
     app.expose({ en: 'English' }, 'langs', 'langs');
 
@@ -26,11 +26,11 @@ module.exports = {
 
     scope.window = scope;
     vm.runInNewContext(js, scope);
-    scope.express.one.should.equal(1);
-    scope.express.two.should.equal(2);
-    scope.express.three.should.equal(3);
+    scope.app.one.should.equal(1);
+    scope.app.two.should.equal(2);
+    scope.app.three.should.equal(3);
     
-    scope.express.settings.title.should.equal('My Site');
+    scope.app.settings.title.should.equal('My Site');
     scope.utils.add(1,5).should.equal(6);
 
     var js = app.exposed('langs')
@@ -43,7 +43,7 @@ module.exports = {
   },
   
   'test app.expose(str)': function(){
-    var app = express.createServer();
+    var app = express();
 
     app
       .expose('var user = { name: "tj" };')
@@ -58,7 +58,7 @@ module.exports = {
   },
   
   'test app.expose(str, null, scope)': function(){
-    var app = express.createServer();
+    var app = express();
 
     app
       .expose('var user = { name: "tj" };', 'foot')
@@ -78,7 +78,7 @@ module.exports = {
   },
   
   'test app.expose(fn) self-calling function': function(){
-    var app = express.createServer()
+    var app = express()
       , err;
 
     app.expose('var foo;')
@@ -110,7 +110,7 @@ module.exports = {
   },
   
   'test app.expose(fn) named function': function(){
-    var app = express.createServer()
+    var app = express()
       , err;
 
     app.expose(function add(a, b){
@@ -139,7 +139,7 @@ module.exports = {
   },
   
   'test app.exposeModule(path)': function(){
-    var app = express.createServer();
+    var app = express();
 
     app.exposeModule(__dirname + '/fixtures/color');
 
@@ -153,7 +153,7 @@ module.exports = {
   },
   
   'test app.exposeModule(path, namespace)': function(){
-    var app = express.createServer();
+    var app = express();
 
     app.exposeModule(__dirname + '/fixtures/color', 'utils.color');
 
@@ -205,7 +205,7 @@ module.exports = {
   // },
   
   'test app.exposeRequire()': function(){
-    var app = express.createServer();
+    var app = express();
 
     app.set('title', 'something');
     app.exposeRequire();
