@@ -1,7 +1,7 @@
 
 # express-expose
 
-  Expose helpers and local variables to the client-side
+  Expose helpers and local variables to the client-side.
 
 ## Installation
 
@@ -13,6 +13,10 @@
       , expose = require('express-expose');
 
     app.expose(...);
+
+## Versions
+
+  Versions `0.3.0` and above are designed for Express 3.x, below for 2.x.
 
 ## Examples
 

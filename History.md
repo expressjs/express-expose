@@ -1,4 +1,11 @@
 
+0.3.0 / 2012-05-30 
+==================
+
+  * Added Express 3.x support
+  * Removed exposing entire modules
+  * Changed default namespace to "app"
+
 0.2.2 / 2012-02-09 
 ==================
 
