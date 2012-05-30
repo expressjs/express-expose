@@ -10,10 +10,6 @@ var express = require('express')
   , vm = require('vm');
 
 module.exports = {
-  'test .version': function(){
-    expose.version.should.match(/^\d+\.\d+\.\d+$/);
-  },
-  
   'test app.expose(name)': function(){
     var app = express();
     app.expose({ one: 1, two: 2, three: 3 });
