@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -132,5 +131,19 @@ module.exports = {
     vm.runInNewContext(js, scope);
     scope.sub(8,7).should.equal(1);
     scope.should.not.have.property('add');
+  },
+
+  'test render view' : function (done) {
+    var app = express();
+
+    app.expose('var foo;');
+    app.set('view engine', 'jade');
+    app.set('views', __dirname + '/views');
+
+    app.render('index', function(err, str){
+      if (err) return done(err);
+      str.should.match(/var foo;/);
+      done();
+    });
   }
 };
