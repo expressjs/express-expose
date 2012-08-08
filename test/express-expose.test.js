@@ -7,6 +7,7 @@ var express = require('express')
   , expose = require('../')
   , assert = require('assert')
   , should = require('should')
+  , request = require('supertest')
   , vm = require('vm');
 
 module.exports = {
@@ -132,5 +133,25 @@ module.exports = {
     vm.runInNewContext(js, scope);
     scope.sub(8,7).should.equal(1);
     scope.should.not.have.property('add');
-  }
+  },
+
+  'test req.expose': function (done) {
+      var app = express();
+      app.set('view engine', 'jade');
+      app.set('views', __dirname + '/views');
+      app.expose('var app = 1;');
+
+      app.get('/', function(req, res) {
+        res.expose('var res = 1;');
+        res.render('index');
+      });
+
+      request(app)
+        .get('/')
+        .end(function(err, res){
+          if (err) throw err;
+          res.text.should.match(/var res/);
+          done();
+        });
+    }
 };
