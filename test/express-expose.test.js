@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -135,7 +134,7 @@ module.exports = {
     scope.should.not.have.property('add');
   },
 
-  'test req.expose': function (done) {
+  'test res.expose': function (done) {
       var app = express();
       app.set('view engine', 'jade');
       app.set('views', __dirname + '/views');
