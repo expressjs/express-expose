@@ -1,5 +1,5 @@
 {   "name": "express-expose"
-  , "version": "0.3.2"
+  , "version": "0.3.3"
   , "description": "Expose helpers and local variables to the client-side"
   , "keywords": ["express"]
   , "author": "TJ Holowaychuk <tj@vision-media.ca>"
