@@ -141,9 +141,11 @@ module.exports = {
     app.set('views', __dirname + '/views');
 
     app.expose('var user = { name: "tj" };')
+    app.expose('user.id = 50;')
 
     app.get('/', function(req, res) {
       res.expose('var lang = "en";');
+      res.expose('var country = "no";');
       res.render('index');
     });
 
@@ -155,6 +157,8 @@ module.exports = {
         var scope = {};
         vm.runInNewContext(res.text, scope);
         scope.user.name.should.equal('tj');
+        scope.user.id.should.equal(50);
+        scope.country.should.equal('no');
         scope.lang.should.equal('en');
         done();
       });
