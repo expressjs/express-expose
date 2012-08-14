@@ -7,7 +7,8 @@ var express = require('express')
   , expose = require('../')
   , assert = require('assert')
   , should = require('should')
-  , vm = require('vm');
+  , vm = require('vm')
+  , request = require('supertest');
 
 module.exports = {
   'test app.expose(name)': function(){
@@ -132,5 +133,30 @@ module.exports = {
     vm.runInNewContext(js, scope);
     scope.sub(8,7).should.equal(1);
     scope.should.not.have.property('add');
-  }
+  },
+
+  'test res.expose(str)': function(done){
+    var app = express();
+    app.set('view engine', 'jade');
+    app.set('views', __dirname + '/views');
+
+    app.expose('var user = { name: "tj" };')
+
+    app.get('/', function(req, res) {
+      res.expose('var lang = "en";');
+      res.render('index');
+    });
+
+    request(app)
+      .get('/')
+      .end(function(err, res) {
+        if (err) throw err;
+
+        var scope = {};
+        vm.runInNewContext(res.text, scope);
+        scope.user.name.should.equal('tj');
+        scope.lang.should.equal('en');
+        done();
+      });
+  },
 };
