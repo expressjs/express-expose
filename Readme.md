@@ -16,7 +16,7 @@
 
 ## Versions
 
-  Versions `0.3.0` and above are designed for Express 3.x, below for 2.x.
+  Versions `0.3.0` and above are designed for Express 3.x, `0.2.2` below for 2.x.
 
 ## Examples
 
@@ -35,17 +35,17 @@
 
       var math = { add: function(a,b){ return a + b; } };
       app.expose(math, 'utils').helpers(math);
-      
+
   Sometimes you might want to output to a different area, so for this we can pass an additional param "languages" which tells express which buffer to write to, which ends up providing us with the local variable "languages" in our template, where the default is "javascript". The "app" string here is the namespace.
 
       app.expose({ en: 'English', fr: 'French' }, 'app', 'languages');
 
   You'll then want to output the default buffer (or others) to your template, in Jade this would look something like:
-  
+
       script!= javascript
 
   And in EJS:
-  
+
       <script><%- javascript %></script>
 
 ### Raw JavaScript
@@ -55,7 +55,7 @@
       app.expose('var some = "variable";');
 
   Optionally passing the destination buffer, providing us with the "head" local variable, instead of the default of "javascript".
-  
+
       app.expose('var some = "variable";', 'head');
 
 ### Exposing Functions
@@ -87,7 +87,7 @@
         res.render('index', { layout: false });
       });
 
-## License 
+## License
 
 (The MIT License)
 
