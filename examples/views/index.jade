@@ -1,10 +1,10 @@
 html
   head
     title= settings.title
-    script!= javascript
+    script!= javascript.
   body
     h1= settings.title
     - if (locals.languages) 
-      script!= languages
+      script!= languages.
     - if (locals.foot) 
-      script!= foot
+      script!= foot.
