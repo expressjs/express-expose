@@ -1,14 +1,21 @@
-{   "name": "express-expose"
-  , "version": "0.3.3"
-  , "description": "Expose helpers and local variables to the client-side"
-  , "keywords": ["express"]
-  , "author": "TJ Holowaychuk <tj@vision-media.ca>"
-  , "devDependencies": {
-      "express": "3.x"
-    , "mocha": "*"
-    , "should": "*"
-    , "jade": "*"
-    , "supertest": "*"
-  }
-  , "main": "index"
+{
+      "name": "express-expose",
+      "version": "0.3.3",
+      "description": "Expose helpers and local variables to the client-side",
+      "keywords": [
+            "express"
+      ],
+      "author": "TJ Holowaychuk <tj@vision-media.ca>",
+      "devDependencies": {
+            "express": "3.x",
+            "mocha": "*",
+            "should": "*",
+            "jade": "*",
+            "supertest": "*"
+      },
+      "main": "index",
+      "repository": {
+            "type": "git",
+            "url": "https://github.com/visionmedia/express-expose.git"
+      }
 }
